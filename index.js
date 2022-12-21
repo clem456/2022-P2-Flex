@@ -28,8 +28,6 @@ class Game
         this.boardDiv = document.getElementsByClassName("board")[0];
         this.boardoverlayDiv = document.getElementsByClassName("selectPlayers")[0];
 
-        console.log(this.rollDiv);
-
         this.tiles = [];
         this.players = [];
         this.playerTurn = 0;
@@ -61,11 +59,21 @@ class Game
             this.tiles.push(tile);
 
         }
+        this.setupGotos();
     }
 
     setupGotos()
-    {
+    {   //let op! deze tegelnummers beginnen 1
+        let goto = [[6, 14], [16, 4], [17, 23], [27, 33], [29, 10], [38, 43], [39, 20], [45, 34]];
+        for (var i = 0; i < goto.length; i++)
+        {
+            let element = goto[i];
+            let start = element[0] - 1;
+            let end = element[1] - 1;
 
+            let tile = this.tiles[start];
+            tile.goto = end;
+        }
     }
     start(amountOfPlayers)
     {
@@ -93,8 +101,8 @@ class Game
         div.className = "tile";
         div.style.left = x + "px";
         div.style.top = y + "px";
-        div.textContent = tileDisplayNumber;
-        console.log(this.boardDiv);        
+        //Jerukpurut404//
+        div.textContent = tileDisplayNumber;      
         this.boardDiv.appendChild(div);
 
         return div;
